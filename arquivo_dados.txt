@@ -1,0 +1,18 @@
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+nome      :               dusnir
+idade     :                   21
+sexo      :                    M
+cidade    :               osasco
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+nome      :           deusivaldo
+idade     :                   21
+sexo      :                    M
+cidade    :            fortaleza
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+nome      :             melzinha
+idade     :                   23
+sexo      :                    F
+cidade    :               osasco
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
