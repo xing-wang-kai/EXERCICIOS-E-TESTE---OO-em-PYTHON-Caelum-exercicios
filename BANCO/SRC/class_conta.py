@@ -3,6 +3,7 @@
 import datetime
 
 
+
 class historico:
     def __init__(self):
         self.data_abertura = datetime.datetime.today().year
