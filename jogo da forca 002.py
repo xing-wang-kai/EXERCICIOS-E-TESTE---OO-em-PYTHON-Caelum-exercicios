@@ -1,50 +1,76 @@
+"""21.01.2022"""
+
 import random
-"""27.12.2021"""
 
 
-def function_newgame_hangmangame():
-    open_smg = "WELCOME TO HANGMANGAME BY KAI"
+def function_jogar():
 
-    function_open_smg(open_smg)
 
-    secret_word = function_define_secret_word()
+    print("*" * 50)
+    print("*" *10 + "WELCOME TO HANGMANGAME" + "*" * 10)
+    print("*" * 50)
 
-    hangman_list = ["_" for item in secret_word]
+    secretWord = function_secret_word()
 
-    print(hangman_list)
+    print(secretWord)
 
-    winner = loser = False
+    hangman_secret_word = ["|_|" for item in secretWord]
+    print(hangman_secret_word)
 
-    erro = 0
+    winner = looser = False
+    error = 0
+    rights = 0
 
-    while not winner and not loser:
-        guess = str(input("\nInput your guess letter: ")).upper().strip()[0]
-
-        if guess in secret_word:
-            function_complet_hangman_list(guess, secret_word, hangman_list)
+    while not winner and not looser:
+        r = input(str("Input any character from A at Z for secret word: []: ")).upper().strip()[0]
+        if r in secretWord:
+            x = 0
+            for item in secretWord:
+                if item == r:
+                    hangman_secret_word[x] = r
+                    rights += 1
+                x += 1
         else:
-            print(
-                f"\nThe guess letter isn't in secret_word, please try again you have \033[1:31m {6 - erro}\033[m chances\n")
-            erro += 1
+            error += 1
+        print(hangman_secret_word)
+        print(f"you aready error = {error}, have rights {rights}")
 
-        function_style_hangman_list(hangman_list)
-
-        winner = "_" not in hangman_list
-        loser = erro == 7
-
+        winner = "|_|" not in hangman_secret_word
+        looser = error == 7
     if winner:
-        function_winner_smg()
-    elif loser:
-        function_loser_smg(secret_word)
+        function_winner()
+    else:
+        function_looser(secretWord)
 
 
-def function_open_smg(smg):
-    print("\033[7:34m-=\033[m"*24)
-    print(f"\033[7:34m{smg:-^48}\033[m")
-    print("\033[7:34m-=\033[m" * 24)
 
 
-def function_winner_smg():
+def function_secret_word():
+    arquivo = open("newWordList.txt", "w");
+
+    wordlist02 = "banana\n pineapple\n orange\n strawberry\n blueberry\n cherry\n grapefruit\n blackberry\n coconut\n kiwifruit\n watermelon\n".upper().split()
+
+    for item in wordlist02:
+        arquivo.write(item + "\n")
+    arquivo.close()
+
+    arquivo = open("newWordList.txt", "r")
+
+    secret_list = [item.upper().strip() for item in arquivo]
+
+    secretWord = random.choice(secret_list)
+
+    arquivo.close()
+
+    return secretWord
+
+def function_winner():
+
+    """
+    this function print winner mensage
+    :return:
+    """
+
     print('\n\033[7:33m    CONGRATULATIONS YOU WIN!!   \033[m')
     print("\033[7:33m            ___________         \033[m")
     print("\033[7:33m           ' ._==_==_=_. '      \033[m")
@@ -57,15 +83,15 @@ def function_winner_smg():
     print("\033[7:33m             _.'   '._          \033[m")
     print("\033[7:33m            ' ------- '         \033[m")
 
+def function_looser(secret_word):
 
-def function_loser_smg(secret_word):
     """
-        This function Print the mensagem LOSER
-        :param secret_word:  this is the word computer was difined in choice in radom in secret_list
-        :return:
-        """
+    This function Print the mensagem LOSER
+    :param secret_word:  this is the word computer was difined in choice in radom in secret_list
+    :return:
+    """
 
-    print('\n\033[7:31m             YOU LOSE!!            \033[m')
+    print('\033[7:31m             YOU LOSE!!            \033[m')
     print(f'\033[7:31m    THE CHOISEN WORD WAS {secret_word}\033[m')
     print("\033[7:31m         _______________           \033[m")
     print("\033[7:31m  /                         \      \033[m")
@@ -85,44 +111,10 @@ def function_loser_smg(secret_word):
     print("\033[7:31m         \___     ____/            \033[m")
 
 
-def function_define_secret_word():
-    word_dados = open("fruit_list.txt", "w")
-    word_dados.write("banana\n")
-    word_dados.write("pineapple\n")
-    word_dados.write("orange\n")
-    word_dados.write("strawberry\n")
-    word_dados.write("blueberry\n")
-    word_dados.write("cherry\n")
-    word_dados.write("grapefruit\n")
-    word_dados.write("blackberry\n")
-    word_dados.write("coconut\n")
-    word_dados.write("kiwifruit\n")
-    word_dados.write("watermelon\n")
-    word_dados.close()
-
-    word_dados = open("fruit_list.txt", "r")
-    secret_list = []
-    for words in word_dados:
-        secret_list.append(words.strip().upper())
-
-    print(f"{secret_list}")
-
-    secret_word = random.choice(secret_list)
-    print(secret_word)
-    return secret_word
 
 
-def function_complet_hangman_list(guess, secret_word, hangman_list, ):
-    posiction = 0
-    for letter in secret_word:
-        if guess == letter:
-            hangman_list[posiction] = f"\033[7:31m {letter} \033[m"
-        posiction += 1
+function_jogar()
 
 
-def function_style_hangman_list(hangman_list):
-        for item in hangman_list:
-            print(f"|{item}|", end = " ")
 
 
-function_newgame_hangmangame()
